@@ -1,0 +1,27 @@
+@CHARSET "ISO-8859-1";
+div.row {
+	margin-left: 20% !important;
+	margin-right: 20% !important;
+}
+
+.frnt-search {
+	margin-left: 10%;
+	margin-right:10%;
+}
+
+#adv-search {
+	margin-right:20%;
+}
+
+.jumbotron {
+	text-align: center;
+}
+
+.srch-options {
+	width: 87px !important;
+}
+
+.recomendations {
+	margin-left: 20%;
+	margin-right: 20%;
+}
