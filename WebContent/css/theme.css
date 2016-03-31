@@ -25,3 +25,7 @@ div.row {
 	margin-left: 20%;
 	margin-right: 20%;
 }
+
+.nav-search {
+	width: 30px !important;
+}
