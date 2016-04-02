@@ -1,25 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app id="WebApp_ID" version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
-	<display-name>jTunes</display-name>
-	
-	<welcome-file-list>
-		<welcome-file>Welcome.jsp</welcome-file>
-	</welcome-file-list>
-	
-	<servlet>
-		<servlet-name>search</servlet-name>
-		<jsp-file>/Search.jsp</jsp-file>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>search</servlet-name>
-		<url-pattern>/search</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>home</servlet-name>
-		<jsp-file>/Welcome.jsp</jsp-file>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>home</servlet-name>
-		<url-pattern>/home</url-pattern>
-	</servlet-mapping>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:web="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd" id="WebApp_ID" version="2.4">
+  <display-name>jTunes</display-name>
+  <welcome-file-list>
+    <welcome-file>/search.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <servlet-name>search</servlet-name>
+    <jsp-file>/search.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>search</servlet-name>
+    <url-pattern>/search</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>results</servlet-name>
+    <jsp-file>/results.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>results</servlet-name>
+    <url-pattern>/results</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>control</servlet-name>
+    <servlet-class>servlets.Control</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>control</servlet-name>
+    <url-pattern>/control</url-pattern>
+  </servlet-mapping>
 </web-app>

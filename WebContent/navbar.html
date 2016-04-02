@@ -1,27 +1,31 @@
 <nav class="navbar navbar-default navbar-fixed-top">
 	<div class="container">
 		<div class="navbar-header">
-      		<a class="navbar-brand" href="home">
-        		jTunes
+      		<a class="navbar-brand" href="search">
+        		<b>jTunes</b>
+      			<small><i> - jUST dO iT</i></small>
       		</a>
     	</div>
    		
         <form class="navbar-form navbar-right" role="search">
-        <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search" name="query" action="search">
-            <div class="input-group-btn">
-            	<select class="form-control btn btn-default" name="extraQuery">
-            		<option value="0" selected>All</option>
-                    <option value="1">Artist</option>
-                    <option value="2">Title</option>
-                    <option value="3">Album</option>
-                    <option value="4">Songs</option>
-            	</select>
-                <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-            </div>
-        </div>
-        <button class="btn btn-primary">Cart</button>
+	        <div class="input-group">
+	            <input type="text" class="form-control" placeholder="Search" value="${param.q}" name="q" action="results">
+	            <div class="input-group-btn">
+	            	<select class="form-control btn btn-default" name="a">
+	            		<option value="0" selected>All</option>
+	                    <option value="1">Album</option>
+	                    <option value="2">Artist</option>
+	                    <option value="3">Songs</option>
+	            	</select>
+	                <button class="btn btn-default" type="submit" style="height: 34px;">
+	                	<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+	                </button>
+	            </div>
+	        </div>
+		    <a class="btn btn-primary" style="height: 33px;" href="/cart">
+		    	<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+		    </a>
         </form>
     </div>
-    </div>  
 </nav>
+<div style="margin-top: 5%;"></div>
