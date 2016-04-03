@@ -7,9 +7,9 @@
       		</a>
     	</div>
    		
-        <form class="navbar-form navbar-right" role="search">
+        <form class="navbar-form navbar-right" role="search" action="results">
 	        <div class="input-group">
-	            <input type="text" class="form-control" placeholder="Search" value="${param.q}" name="q" action="results">
+	            <input type="text" class="form-control" placeholder="Search" value="${param.q}" name="q" >
 	            <div class="input-group-btn">
 	            	<select class="form-control btn btn-default" name="a">
 	            		<option value="0" selected>All</option>
@@ -17,12 +17,12 @@
 	                    <option value="2">Artist</option>
 	                    <option value="3">Songs</option>
 	            	</select>
-	                <button class="btn btn-default" type="submit" style="height: 34px;">
+	                <button class="btn btn-default" style="height: 34px;">
 	                	<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 	                </button>
 	            </div>
 	        </div>
-		    <a class="btn btn-primary" style="height: 33px;" href="/cart">
+		    <a class="btn btn-primary" style="height: 33px;" href="cart">
 		    	<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
 		    </a>
         </form>

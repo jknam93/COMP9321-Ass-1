@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ page import="beans.*, java.util.*"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<jsp:useBean id="search" class="beans.SearchBean" scope="session" />
 <!DOCTYPE html PUBulC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -41,22 +44,24 @@
 		<div class="recomendations">
 			<p>Why not give these tunes a go</p>
 			<!-- PLACEHOLDER -->
+			<c:set var="songs" value="${search.random(10) }" scope="session"/>
 			<div class="col-md-6 col-sm-8">
 				<ul>
-					<li><a>Let it be - The Beatles</a></li>
-					<li><a>Bad - Michael Jackson</a></li>
-					<li><a>Hound Dog - Elvis Presley</a></li>
-					<li><a>Never Going To - Rick Astley</a></li>
-					<li><a>Can't Touch This - MC Hammer</a></li>
+					<c:forEach var="i" begin="0" end="4">
+					<li><a>
+						${songs.get(i).getChildNodes().item(3).getTextContent() } - 
+						${songs.get(i).getChildNodes().item(1).getTextContent() }
+					</a></li>
+					</c:forEach>
 				</ul>
 			</div>
 			<div class="col-md-6 col-sm-8">
 				<ul>
-					<li><a>Let it be - The Beatles</a></li>
-					<li><a>Bad - Michael Jackson</a></li>
-					<li><a>Hound Dog - Elvis Presley</a></li>
-					<li><a>Never Going To - Rick Astley</a></li>
-					<li><a>Can't Touch This - MC Hammer</a></li>
+					<c:forEach var="i" begin="0" end="4">
+					<li><a>
+						${songs.get(i).getChildNodes().item(3).getTextContent() }
+					</a></li>
+					</c:forEach>
 				</ul>
 			</div>
 			<!-- /PLACEHOLDER -->

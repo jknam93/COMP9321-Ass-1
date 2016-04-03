@@ -47,94 +47,87 @@ public class SearchBean implements Serializable {
 		}
 		return ret;
 	}
-	public ArrayList<Node> searchAlbums(String query){
+	public ArrayList<Node> searchAlbums(String query) {
 		NodeList albums = doc.getElementsByTagName("albumList");
 		ArrayList<Node> ret = new ArrayList<Node>();
-		
-		for(int i = 0; i <= albums.getLength() - 1; i++){
+
+		for (int i = 0; i <= albums.getLength() - 1; i++) {
 			NodeList details = albums.item(i).getChildNodes();
-			for(int j = 0; j <= details.getLength() - 1; j++){
+			for (int j = 1; j <= details.getLength() - 1; j+=2) {
 				Node detail = details.item(j);
-				if(detail.getFirstChild() != null){
-					if(detail.getNodeName().equals("songList")){
-//						If you want to include songs in the search target
-//						String title = child.getChildNodes().item(3).getTextContent().toLowerCase();
-//						System.out.println(title);
-//						if(child.getChildNodes().item(1).toString().contains(query.toLowerCase())){
-//							ret.add(nodes.item(i));
-//							break;
-//						}
-						break;
-					} else {
-						String value = detail.getTextContent().toLowerCase();
-						if(value.contains(query.toLowerCase())){
-							ret.add(albums.item(i));
-							break;
-						}
-					}
-				}
-			}
-		}
-		return ret;
-	}
-	public ArrayList<Node> searchSongs(String query){
-		
-		NodeList songs = doc.getElementsByTagName("songList");
-		ArrayList<Node> ret = new ArrayList<Node>();
-		
-		for(int i = 0; i <= songs.getLength() - 1; i++){
-			NodeList details = songs.item(i).getChildNodes();
-			for(int j = 0; j <= details.getLength() - 1; j++){
-				Node detail = details.item(j);
-				if(detail.getFirstChild() != null){
-					String value = detail.getFirstChild().toString().toLowerCase();
-					if(value.contains(query.toLowerCase())){
-						ret.add(songs.item(i));
-					}
-				}
-			}
-		}
-		return ret;
-	}
-	public ArrayList<Node> searchAll(String query){
-		NodeList albums = doc.getElementsByTagName("albumList");
-		ArrayList<Node> ret = new ArrayList<Node>();
-		
-		for(int i = 0; i <= albums.getLength() - 1; i++){
-			NodeList children = albums.item(i).getChildNodes();
-			for(int j = 0; j <= children.getLength() - 1; j++){
-				Node child = children.item(j);
-				if(child.getFirstChild() != null){
-					String value = child.getFirstChild().toString().toLowerCase();
-					if(value.contains(query.toLowerCase())){
+				if (detail.getNodeName().equals("songList")) {
+					break;
+				} else {
+					String value = detail.getTextContent().toLowerCase();
+					if (value.contains(query.toLowerCase())) {
 						ret.add(albums.item(i));
 						break;
-					} else if(child.getNodeName().equals("songList")){
-						String title = child.getChildNodes().item(3).getTextContent().toLowerCase();
-						if(child.getChildNodes().item(1).toString().contains(query.toLowerCase())){
-							ret.add(albums.item(i));
-							break;
-						}
 					}
 				}
 			}
 		}
 		return ret;
 	}
-	
-	public ArrayList<Node> random(int n){
+
+	public ArrayList<Node> searchSongs(String query) {
+
+		NodeList songs = doc.getElementsByTagName("songList");
+		ArrayList<Node> ret = new ArrayList<Node>();
+
+		for (int i = 0; i <= songs.getLength() - 1; i++) {
+			NodeList details = songs.item(i).getChildNodes();
+			for (int j = 1; j <= details.getLength() - 1; j+=2) {
+				Node detail = details.item(j);
+				String value = detail.getFirstChild().getTextContent().toLowerCase();
+				if (value.contains(query.toLowerCase())) {
+					ret.add(songs.item(i));
+				}
+			}
+		}
+		return ret;
+	}
+
+	public ArrayList<Node> searchAll(String query) {
+		
+		ArrayList<Node> ret = new ArrayList<Node>();
+		ret.addAll(this.searchAlbums(query));
+		ret.addAll(this.searchSongs(query));
+
+		return ret;
+	}
+
+	public ArrayList<Node> random(int n) {
 		NodeList songs = doc.getElementsByTagName("songList");
 		ArrayList<Node> ret = new ArrayList<Node>();
 		int numSongs = songs.getLength();
 		Random rng = new Random(System.currentTimeMillis());
 		int i = 0;
-		while(i != n){
+		while (i != n) {
 			Node song = songs.item(rng.nextInt(numSongs) % numSongs);
-			if(!ret.contains(song)){
+			if (!ret.contains(song)) {
 				ret.add(song);
 				i++;
 			}
 		}
 		return ret;
+	}
+	public Node searchByID(String id){
+
+		System.out.println(id);
+		NodeList album = doc.getElementsByTagName("ID");
+		for(int i = 0; i <= album.getLength() - 1; i++){
+			if(album.item(i).getTextContent().equals(id)){
+				System.out.println(album.item(i).getParentNode().getTextContent());
+				return album.item(i).getParentNode();
+			}
+		}
+		NodeList songs = doc.getElementsByTagName("songID");
+		for(int i = 0; i <= songs.getLength() - 1; i++){
+			if(songs.item(i).getTextContent().equals(id)){
+				System.out.println(songs.item(i).getParentNode().getTextContent());
+				return songs.item(i).getParentNode();
+			}
+		}
+		return null;
 	}
 }

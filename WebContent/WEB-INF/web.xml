@@ -20,6 +20,14 @@
     <servlet-name>results</servlet-name>
     <url-pattern>/results</url-pattern>
   </servlet-mapping>
+   <servlet>
+    <servlet-name>cart</servlet-name>
+    <jsp-file>/cart.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>cart</servlet-name>
+    <url-pattern>/cart</url-pattern>
+  </servlet-mapping>
   
   <servlet>
     <servlet-name>control</servlet-name>
@@ -27,6 +35,6 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>control</servlet-name>
-    <url-pattern>/control</url-pattern>
+    <url-pattern>/addCart</url-pattern>
   </servlet-mapping>
 </web-app>
