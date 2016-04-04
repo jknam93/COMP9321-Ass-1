@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:web="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd" id="WebApp_ID" version="2.4">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:web="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd" id="WebApp_ID" version="2.4">
   <display-name>jTunes</display-name>
   <welcome-file-list>
     <welcome-file>/search.jsp</welcome-file>
@@ -13,6 +13,14 @@
     <url-pattern>/search</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>checkout</servlet-name>
+    <jsp-file>/checkout.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>checkout</servlet-name>
+    <url-pattern>/check-out</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>results</servlet-name>
     <jsp-file>/results.jsp</jsp-file>
   </servlet>
@@ -20,7 +28,7 @@
     <servlet-name>results</servlet-name>
     <url-pattern>/results</url-pattern>
   </servlet-mapping>
-   <servlet>
+  <servlet>
     <servlet-name>cart</servlet-name>
     <jsp-file>/cart.jsp</jsp-file>
   </servlet>
@@ -28,13 +36,20 @@
     <servlet-name>cart</servlet-name>
     <url-pattern>/cart</url-pattern>
   </servlet-mapping>
-  
   <servlet>
-    <servlet-name>control</servlet-name>
-    <servlet-class>servlets.Control</servlet-class>
+    <servlet-name>addToCart</servlet-name>
+    <servlet-class>servlets.AddToCart</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>control</servlet-name>
+    <servlet-name>addToCart</servlet-name>
     <url-pattern>/addCart</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>checkout</servlet-name>
+    <servlet-class>servlets.Checkout</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>checkout</servlet-name>
+    <url-pattern>/checkoutControll</url-pattern>
   </servlet-mapping>
 </web-app>

@@ -17,7 +17,7 @@
 	<%@include file="/navbar.html"%>
 	<div class="row">
 		<h3>Cart</h3>
-		<form method="GET" action="checkout">
+		<form method="GET" action="checkoutControll">
 			<table class="table table-striped">
 				<thead>
 					<tr>
@@ -43,21 +43,25 @@
 										value="${item.getParentNode().getChildNodes().item(9).getTextContent()}" />
 									<c:set var="price"
 										value="${item.getChildNodes().item(7).getTextContent()}" />
+									<c:set var="type"
+										value="${'Song'}" />
 								</c:when>
 								<c:otherwise>
 									<c:set var="publisher"
 										value="${item.getChildNodes().item(9).getTextContent()}" />
 									<c:set var="price"
 										value="${item.getLastChild().getPreviousSibling().getTextContent()}" />
+									<c:set var="type"
+										value="${'Album'}" />
 								</c:otherwise>
 							</c:choose>
 							<tr>
 								<th>${title}</th>
 								<th>${artist}</th>
-								<th></th>
+								<th>${type}</th>
 								<th>${publisher}</th>
 								<th>$${price}</th>
-								<th><input type="checkbox" name="id" value="${id}"></th>
+								<th><input type="checkbox" name="id" value="${c.key}"></th>
 							</tr>
 						</c:if>
 					</c:forEach>

@@ -19,9 +19,7 @@
 	<div class="row">
 		<div class="jumbotron">
 			<h1>Welcome to jTune</h1>
-			<!-- PLACEHOLDER -->
-			<p>jUST dO iT</p>
-			<!-- /PLACEHOLDER -->
+			<p>Our slogan here</p>
 		</div>
 		<div class="frnt-search">
 			<form class="input-group" action="results">
@@ -43,7 +41,6 @@
 		<!-- /.col-lg-6 -->
 		<div class="recomendations">
 			<p>Why not give these tunes a go</p>
-			<!-- PLACEHOLDER -->
 			<c:set var="songs" value="${search.random(10) }" scope="session"/>
 			<div class="col-md-6 col-sm-8">
 				<ul>
@@ -57,14 +54,14 @@
 			</div>
 			<div class="col-md-6 col-sm-8">
 				<ul>
-					<c:forEach var="i" begin="0" end="4">
+					<c:forEach var="i" begin="5" end="9">
 					<li><a>
-						${songs.get(i).getChildNodes().item(3).getTextContent() }
+						${songs.get(i).getChildNodes().item(3).getTextContent() } - 
+						${songs.get(i).getChildNodes().item(1).getTextContent() }
 					</a></li>
 					</c:forEach>
 				</ul>
 			</div>
-			<!-- /PLACEHOLDER -->
 		</div>
 	</div>
 	<!-- /.row -->

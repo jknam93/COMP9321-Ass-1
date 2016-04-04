@@ -12,13 +12,13 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet implementation class Control
  */
 @WebServlet("/Control")
-public class Control extends HttpServlet {
+public class AddToCart extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Control() {
+    public AddToCart() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,9 +27,6 @@ public class Control extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		for(Cookie c: request.getCookies()){
-			System.out.println(c.getName() + ":" + c.getValue());
-		}
 		for(String id: request.getParameterValues("id")){
 			boolean addCookie = true;
 			for(Cookie c: request.getCookies()){

@@ -113,18 +113,15 @@ public class SearchBean implements Serializable {
 	}
 	public Node searchByID(String id){
 
-		System.out.println(id);
 		NodeList album = doc.getElementsByTagName("ID");
 		for(int i = 0; i <= album.getLength() - 1; i++){
 			if(album.item(i).getTextContent().equals(id)){
-				System.out.println(album.item(i).getParentNode().getTextContent());
 				return album.item(i).getParentNode();
 			}
 		}
 		NodeList songs = doc.getElementsByTagName("songID");
 		for(int i = 0; i <= songs.getLength() - 1; i++){
 			if(songs.item(i).getTextContent().equals(id)){
-				System.out.println(songs.item(i).getParentNode().getTextContent());
 				return songs.item(i).getParentNode();
 			}
 		}
