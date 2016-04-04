@@ -1,0 +1,71 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ page import="beans.*, java.util.*"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<jsp:useBean id="search" class="beans.SearchBean" scope="session" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/theme.css" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/bootstrap.min.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>jTunes - Cart</title>
+</head>
+<body>
+	<%@include file="/navbar.html"%>
+	<div class="row">
+		<h3>Cart</h3>
+		<form method="GET" action="checkout">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Title</th>
+						<th>Artist</th>
+						<th>Type</th>
+						<th>Publisher</th>
+						<th>Price</th>
+						<th>Add</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach var="c" items="${cookie}">
+						<c:if test="${c.key ne 'JSESSIONID'}">
+							<c:set var="item" value="${search.searchByID(c.key)}" />
+							<c:set var="artist"
+								value="${item.getChildNodes().item(1).getTextContent()}" />
+							<c:set var="title"
+								value="${item.getChildNodes().item(3).getTextContent()}" />
+							<c:choose>
+								<c:when test="${item.getNodeName() eq 'songList' }">
+									<c:set var="publisher"
+										value="${item.getParentNode().getChildNodes().item(9).getTextContent()}" />
+									<c:set var="price"
+										value="${item.getChildNodes().item(7).getTextContent()}" />
+								</c:when>
+								<c:otherwise>
+									<c:set var="publisher"
+										value="${item.getChildNodes().item(9).getTextContent()}" />
+									<c:set var="price"
+										value="${item.getLastChild().getPreviousSibling().getTextContent()}" />
+								</c:otherwise>
+							</c:choose>
+							<tr>
+								<th>${title}</th>
+								<th>${artist}</th>
+								<th></th>
+								<th>${publisher}</th>
+								<th>$${price}</th>
+								<th><input type="checkbox" name="id" value="${id}"></th>
+							</tr>
+						</c:if>
+					</c:forEach>
+				</tbody>
+			</table>
+			<input type="submit" class="btn btn-success" value ="Checkout" name="checkout">
+			<input type="submit" class="btn btn-danger" value ="Remove" name="remove">
+		</form>
+	</div>
+</body>
+</html>
