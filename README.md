@@ -4,5 +4,5 @@
 ##Aims
 To design an implement a music store. 
 
-##Skills Demonstrated/Technologies Esed
-The web application will demonstrate use of XML, java servlets and JSPs
+##Skills Demonstrated/Technologies Used
+The web application will demonstrate use of XML, java servlets and JSPs, run in a tomcat server
