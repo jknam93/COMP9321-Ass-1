@@ -4,6 +4,7 @@
   <welcome-file-list>
     <welcome-file>/search.jsp</welcome-file>
   </welcome-file-list>
+  
   <servlet>
     <servlet-name>search</servlet-name>
     <jsp-file>/search.jsp</jsp-file>
@@ -11,14 +12,6 @@
   <servlet-mapping>
     <servlet-name>search</servlet-name>
     <url-pattern>/search</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>checkout</servlet-name>
-    <jsp-file>/checkout.jsp</jsp-file>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>checkout</servlet-name>
-    <url-pattern>/check-out</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>results</servlet-name>
@@ -37,6 +30,15 @@
     <url-pattern>/cart</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>thank</servlet-name>
+    <jsp-file>/thankYou.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>thank</servlet-name>
+    <url-pattern>/thankYou</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
     <servlet-name>addToCart</servlet-name>
     <servlet-class>servlets.AddToCart</servlet-class>
   </servlet>
@@ -45,11 +47,11 @@
     <url-pattern>/addCart</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>checkout</servlet-name>
-    <servlet-class>servlets.Checkout</servlet-class>
+    <servlet-name>cartControl</servlet-name>
+    <servlet-class>servlets.CartControl</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>checkout</servlet-name>
-    <url-pattern>/checkoutControll</url-pattern>
+    <servlet-name>cartControl</servlet-name>
+    <url-pattern>/cartControl</url-pattern>
   </servlet-mapping>
 </web-app>

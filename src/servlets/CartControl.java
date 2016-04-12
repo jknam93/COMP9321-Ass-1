@@ -8,21 +8,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.xml.sax.SAXException;
-
-import beans.SearchBean;
-
 /**
- * Servlet implementation class Control
+ * Servlet implementation class Checkout
  */
-@WebServlet("/Control")
-public class AddToCart extends HttpServlet {
+public class CartControl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AddToCart() {
+    public CartControl() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,31 +26,25 @@ public class AddToCart extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try {
-			SearchBean search = new SearchBean();
+		//no 
+		if(request.getParameter("id") == null) {
+			response.sendRedirect("cart");
+		} else  if(request.getParameter("remove") != null ){
 			for(String id: request.getParameterValues("id")){
-				boolean addCookie = true;
 				for(Cookie c: request.getCookies()){
-					if(c.getValue().equals(id)){
-						Integer value = Integer.parseInt(c.getValue());
-						value++;
-						c.setValue(value.toString());
-						addCookie = false;
-						break;
+					if(c.getName().equals(id)){
+						c.setMaxAge(0);
+						response.addCookie(c);
 					}
 				}
-				if(addCookie == true){
-					Cookie freshCookie = new Cookie(id, "1");
-					response.addCookie(freshCookie);
-				}
-			}
-	                                                       
+			}              
 		    response.sendRedirect("cart"); 
-		} catch (SAXException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} else {
+			for(String id: request.getParameterValues("id")){
+				System.out.println(id);
+			}    
+			request.getRequestDispatcher("/checkout.jsp").forward(request, response);
 		}
-		
 		
 	}
 

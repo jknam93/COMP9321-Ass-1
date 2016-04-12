@@ -36,13 +36,26 @@ public class SearchBean implements Serializable {
 			e.printStackTrace();
 		}
 	}
-	public ArrayList<Node> searchArtists(String query){
-		NodeList nodes = doc.getElementsByTagName("artist");
+	public ArrayList<Node> searchSongArtists(String query){
+		NodeList nodes = doc.getElementsByTagName("songList");
+		ArrayList<Node> ret = new ArrayList<Node>();
+		for(int i = 0; i != nodes.getLength() -1; i++){
+			Node song = nodes.item(i);
+			String artist = song.getChildNodes().item(1).getTextContent().toLowerCase();
+			if(artist.contains(query.toLowerCase())){
+				ret.add(song);
+			}
+		}
+		return ret;
+	}
+	public ArrayList<Node> searchAlbumArtists(String query){
+		NodeList nodes = doc.getElementsByTagName("albumList");
 		ArrayList<Node> ret = new ArrayList<Node>();
 		for(int i = 0; i <= nodes.getLength() - 1;i++){
-			String artist = nodes.item(i).getTextContent().toLowerCase();
+			Node album = nodes.item(i);
+			String artist = album.getChildNodes().item(1).getTextContent().toLowerCase();
 			if(artist.contains(query.toLowerCase())){
-				ret.add(nodes.item(i).getParentNode());
+				ret.add(album);
 			}
 		}
 		return ret;
@@ -78,7 +91,7 @@ public class SearchBean implements Serializable {
 			NodeList details = songs.item(i).getChildNodes();
 			for (int j = 1; j <= details.getLength() - 1; j+=2) {
 				Node detail = details.item(j);
-				String value = detail.getFirstChild().getTextContent().toLowerCase();
+				String value = detail.getTextContent().toLowerCase();
 				if (value.contains(query.toLowerCase())) {
 					ret.add(songs.item(i));
 				}

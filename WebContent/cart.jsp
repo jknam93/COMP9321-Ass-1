@@ -2,6 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="beans.*, java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:useBean id="search" class="beans.SearchBean" scope="session" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -17,7 +18,8 @@
 	<%@include file="/navbar.html"%>
 	<div class="row">
 		<h3>Cart</h3>
-		<form method="GET" action="checkoutControll">
+		<form method="GET" action="cartControl">
+			<c:set var="total" value="0"/>
 			<table class="table table-striped">
 				<thead>
 					<tr>
@@ -55,20 +57,26 @@
 										value="${'Album'}" />
 								</c:otherwise>
 							</c:choose>
+							<c:set var="total" value="${total + price}"/>
 							<tr>
 								<th>${title}</th>
 								<th>${artist}</th>
 								<th>${type}</th>
 								<th>${publisher}</th>
-								<th>$${price}</th>
+								<th><fmt:formatNumber value="${price}" type="CURRENCY"/></th>
 								<th><input type="checkbox" name="id" value="${c.key}"></th>
 							</tr>
 						</c:if>
 					</c:forEach>
 				</tbody>
 			</table>
-			<input type="submit" class="btn btn-success" value ="Checkout" name="checkout">
-			<input type="submit" class="btn btn-danger" value ="Remove" name="remove">
+			<div class="col-md 6 col-sm-8">
+				<b>Total <fmt:formatNumber value="${total}" type="CURRENCY"/></b>
+			</div>
+			<div class="col-md 6 col-sm-8">
+				<input type="submit" class="btn btn-success" value ="Checkout" name="checkout">
+				<input type="submit" class="btn btn-danger" value ="Remove" name="remove">
+			</div>
 		</form>
 	</div>
 </body>

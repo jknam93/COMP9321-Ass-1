@@ -2,6 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="beans.*, java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:useBean id="search" class="beans.SearchBean" scope="session" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -16,88 +17,51 @@
 <body>
 	<%@include file="/navbar.html"%>
 	<div class="row">
-		<h3>Results</h3>
+		<span>
+			<h3>
+				Results
+				<c:choose>
+					<c:when test="${param.a eq 1}">
+						<c:set var="albums" scope="session"
+							value="${search.searchAlbums(param.q)}" />
+						- by Album
+					</c:when>
+					<c:when test="${param.a eq 2}">
+						<c:set var="songs" scope="session"
+							value="${search.searchSongArtists(param.q)}" />
+						<c:set var="albums" scope="session"
+							value="${search.searchAlbumArtists(param.q)}" />
+						- by Artist
+					</c:when>
+					<c:when test="${param.a eq 3}">
+						<c:set var="songs" scope="session"
+							value="${search.searchSongs(param.q)}" />
+						- by Song
+					</c:when>
+					<c:otherwise>
+						<c:set var="songs" scope="session"
+							value="${search.searchSongs(param.q)}" />
+						<c:set var="albums" scope="session"
+							value="${search.searchAlbums(param.q)}" />
+						 - by All
+					</c:otherwise>
+				</c:choose>
+			</h3>
+		</span>
 		<c:choose>
-			<c:when test="${param.a eq 1}">
-				<c:set var="result" scope="session"
-					value="${search.searchAlbums(param.q)}" />
-			</c:when>
-			<c:when test="${param.a eq 2}">
-				<c:set var="result" scope="session"
-					value="${search.searchArtists(param.q)}" />
-			</c:when>
-			<c:when test="${param.a eq 3}">
-				<c:set var="result" scope="session"
-					value="${search.searchSongs(param.q)}" />
-			</c:when>
-			<c:otherwise>
-				<c:set var="result" scope="session"
-					value="${search.searchAll(param.q)}" />
-			</c:otherwise>
-		</c:choose>
-		<c:choose>
-			<c:when test="${empty result}">
+			<c:when test="${empty songs and empty albums}">
 				No results found
 			</c:when>
 			<c:otherwise>
 				<form method="POST" action="addCart">
-					<table class="table table-striped">
-						<thead>
-							<tr>
-								<th>Title</th>
-								<th>Artist</th>
-								<th>Genre</th>
-								<th>Publisher</th>
-								<th>Year</th>
-								<th>Price</th>
-								<th>Add</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach var="item" items="${result}">
-								<c:set var="artist"
-									value="${item.getChildNodes().item(1).getTextContent()}" />
-								<c:set var="title"
-									value="${item.getChildNodes().item(3).getTextContent()}" />
-								<c:choose>
-									<c:when test="${item.getNodeName() eq 'songList' }">
-										<c:set var="genre"
-											value="${item.getParentNode().getChildNodes().item(7).getTextContent()}" />
-										<c:set var="publisher"
-											value="${item.getParentNode().getChildNodes().item(9).getTextContent()}" />
-										<c:set var="year"
-											value="${item.getParentNode().getChildNodes().item(11).getTextContent()}" />
-										<c:set var="price"
-											value="${item.getChildNodes().item(7).getTextContent()}" />
-										<c:set var="id"
-											value="${item.getChildNodes().item(9).getTextContent()}" />
-									</c:when>
-									<c:otherwise>
-										<c:set var="genre"
-											value="${item.getChildNodes().item(7).getTextContent()}" />
-										<c:set var="publisher"
-											value="${item.getChildNodes().item(9).getTextContent()}" />
-										<c:set var="year"
-											value="${item.getChildNodes().item(11).getTextContent()}" />
-										<c:set var="price"
-											value="${item.getLastChild().getPreviousSibling().getTextContent()}" />
-										<c:set var="id"
-											value="${item.getChildNodes().item(5).getTextContent()}" />
-									</c:otherwise>
-								</c:choose>
-
-								<tr>
-									<th>${title}</th>
-									<th>${artist}</th>
-									<th>${genre}</th>
-									<th>${publisher}</th>
-									<th>${year}</th>
-									<th>$${price}</th>
-									<th><input type="checkbox" name="id" value="${id}"></th>
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
+					<c:if test="${param.a ne 3}">
+						<h4>Albums (${albums.size()})</h4>
+						<%@include file="/albumTable.jsp"%>
+					</c:if>
+					<c:if test="${param.a ne 1}">
+						<h4>Songs (${songs.size()})</h4>
+						<%@include file="/songTable.jsp"%>
+					</c:if>
 					<button class="btn btn-default" action="submit">Add to
 						Cart</button>
 				</form>
@@ -107,4 +71,20 @@
 	</div>
 	<!-- row -->
 </body>
+<script>
+	function checkDuplicates(id) {
+		if(document.getElementById(id).checked == true){
+			if(document.cookie.indexOf(id) != -1){
+				alert("This item is already in your cart");
+			}
+		}
+	}
+	function checkAlbum(id, albumID) {
+		if(document.getElementById(id).checked == true){
+			if(document.cookie.indexOf(albumID) != -1){
+				alert("The album containing this song is already in the cart");
+			}
+		}
+	}
+</script>
 </html>

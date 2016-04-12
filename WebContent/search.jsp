@@ -35,10 +35,16 @@
 					<button class="btn btn-default" type="submit">Go!</button>
 				</span>
 			</form>
-			<!-- /input-group -->
-			<!-- <a href="/advancedSearch" id="adv-srch" >Advanced Search</a> -->
 		</div>
 		<!-- /.col-lg-6 -->
+		<div class="cart button">
+			<a href="cart" class="center">
+				Check out your cart
+				<button class="btn btn-primary" style="height: 33px;" href="cart">
+			    	<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+			    </button>
+			</a>
+		</div>
 		<div class="recomendations">
 			<p>Why not give these tunes a go</p>
 			<c:set var="songs" value="${search.random(10) }" scope="session"/>
