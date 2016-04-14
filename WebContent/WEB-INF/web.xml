@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:web="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd" id="WebApp_ID" version="2.4">
+  <display-name>jTunes</display-name>
+  <welcome-file-list>
+    <welcome-file>/search.jsp</welcome-file>
+  </welcome-file-list>
+  
+  <servlet>
+    <servlet-name>search</servlet-name>
+    <jsp-file>/search.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>search</servlet-name>
+    <url-pattern>/search</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>results</servlet-name>
+    <jsp-file>/results.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>results</servlet-name>
+    <url-pattern>/results</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>cart</servlet-name>
+    <jsp-file>/cart.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>cart</servlet-name>
+    <url-pattern>/cart</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>thank</servlet-name>
+    <jsp-file>/thankYou.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>thank</servlet-name>
+    <url-pattern>/thankYou</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>addToCart</servlet-name>
+    <servlet-class>servlets.AddToCart</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>addToCart</servlet-name>
+    <url-pattern>/addCart</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>cartControl</servlet-name>
+    <servlet-class>servlets.CartControl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>cartControl</servlet-name>
+    <url-pattern>/cartControl</url-pattern>
+  </servlet-mapping>
+</web-app>
